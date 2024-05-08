@@ -1,13 +1,25 @@
 'use strict';
-const { default: mongoose } = require('mongoose');
-const { env } = require('process');
+const mongoose = require('mongoose');
+const { DB_URL, DB_NAME } = process.env;
 
-const DB_URL = `${env.DB_URL}/${env.DB_NAME}`;
+const connectToDb = async () => {
+	try {
+		await mongoose.connect(`${DB_URL}/${DB_NAME}`, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			writeConcern: {
+				w: 'majority'
+			}
+		});
+		console.log('Connected to MongoDB');
+	} catch (error) {
+		console.error('Failed to connect to MongoDB:', error);
+	}
+};
 
-const connectToDb = async (dbUrl) => await mongoose.connect(dbUrl);
-
-connectToDb(DB_URL);
+connectToDb();
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'failed to connect to mongoDb'));
+// Handle connection errors
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));

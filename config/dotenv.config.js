@@ -10,7 +10,7 @@ const envVars = ['PORT'];
 dotenv.config();
 const ENV_BASE_PATH = path.join(__dirname, '..', `.env.${env.APP_ENV}`);
 dotenv.config({
-	path: ENV_BASE_PATH,
+	path: ENV_BASE_PATH
 });
 
 function isEnvVarExits(envVars) {
@@ -20,10 +20,8 @@ function isEnvVarExits(envVars) {
 			throw {
 				code: 500,
 				error: {
-					message: `following env vars are not defined:\n ${notDefinedEnvVars.join(
-						', ',
-					)}`,
-				},
+					message: `following env vars are not defined:\n ${notDefinedEnvVars.join(', ')}`
+				}
 			};
 		return res();
 	});

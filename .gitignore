@@ -1,4 +1,7 @@
 todo.txt
 node_modules
-#.env
-#.env.dev
+.env
+.env.dev
+package-lock.json
+```
+.env

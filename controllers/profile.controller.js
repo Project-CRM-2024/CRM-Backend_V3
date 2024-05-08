@@ -5,7 +5,7 @@ const indexProfileController = (req, res) => {
 	res.status(200).send({
 		code: res.statusCode,
 		message: `hello ${user.fullname} welcome to your profile `,
-		user,
+		user
 	});
 };
 

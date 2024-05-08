@@ -4,8 +4,8 @@ const errorHandler = (err, req, res) => {
 		code: res.statusCode,
 		error: {
 			message: err.message || 'internal server error',
-			...err,
-		},
+			...err
+		}
 	});
 };
 

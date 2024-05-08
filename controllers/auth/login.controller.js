@@ -1,24 +1,44 @@
+'use strict';
 const jwt = require('jsonwebtoken');
-
-('use strict');
-
-const userModel = require('../../models/user.model');
-const { verifyPassword, genToken } = require('../../utils/auth.utils');
+const UserModel = require('../../models/user.model');
+const bcrypt = require('bcrypt');
 
 const loginController = async (req, res) => {
-	let { email, password } = req.body;
-	let user = await userModel.findOne({ email });
-	if (!user || !verifyPassword(password, user.password))
-		return res.status(404).send({
+	const { email, password } = req.body;
+
+	try {
+		const user = await UserModel.findOne({ email });
+
+		if (!user || !bcrypt.compareSync(password, user.password)) {
+			return res
+				.status(401)
+				.json({ message: 'Authentication failed: Invalid username or password' });
+		}
+
+		const token = jwt.sign(
+			{
+				user: {
+					id: user._id,
+					username: `${user.firstName} ${user.lastName}`,
+					email: email,
+					role: user.role
+				}
+			},
+			'your_secret_key',
+			{ expiresIn: '1h' }
+		);
+
+		return res.status(201).json({
 			code: res.statusCode,
-			error: { message: 'email or password is invalid' },
+			message: 'Successfully logged in 😁',
+			token: token,
+			userId: user._id,
+			role: user.role
 		});
-	let token = genToken({ email: user.email, password: user.password });
-	res.status(200).json({
-		code: res.statusCode,
-		message: 'successfully logged in 😁',
-		token,
-	});
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: 'Internal server error' });
+	}
 };
 
 module.exports = loginController;

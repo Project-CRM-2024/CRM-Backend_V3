@@ -10,8 +10,8 @@ const checkAuth = async (req, res, next) => {
 			return res.status(403).json({
 				code: res.statusCode,
 				error: {
-					message: 'No credentials sent!',
-				},
+					message: 'No credentials sent!'
+				}
 			});
 		}
 		let [bearer, token] = authHeader.split(' ');
@@ -19,13 +19,13 @@ const checkAuth = async (req, res, next) => {
 			if (token) {
 				let verifyResult = verifyToken(token);
 				const user = await userModel.findOne({
-					email: verifyResult.email,
+					email: verifyResult.email
 				});
 				req.authenticated = !!user;
 				if (!user)
 					return res.status(404).send({
 						code: res.statusCode,
-						error: { message: 'invalid token' },
+						error: { message: 'invalid token' }
 					});
 				req.user = user;
 				return next();
@@ -34,12 +34,14 @@ const checkAuth = async (req, res, next) => {
 		throw {
 			status: 403,
 			error: {
-				message: 'invalid credentials sent!',
-			},
+				message: 'invalid credentials sent!'
+			}
 		};
 	} catch (error) {
 		next(error);
 	}
 };
+
+
 
 module.exports = checkAuth;
