@@ -12,7 +12,7 @@ require('./config/dotenv.config');
 require('./config/mongoose.config');
 
 const app = express();
-app.use(cors("*"))
+app.use(cors('*'));
 
 const server = http.createServer(app); // Remove the empty object from createServer
 const PORT = env.PORT;

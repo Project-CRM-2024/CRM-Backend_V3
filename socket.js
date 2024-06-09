@@ -19,7 +19,7 @@ function init(server) {
 
 function emitMessage(userId) {
 	if (io) {
-		io.emit(`notification-user-${userId}`, "Emit notification");
+		io.emit(`notification-user-${userId}`, 'Emit notification');
 	} else {
 		console.error('Socket.io is not initialized');
 	}
@@ -29,4 +29,3 @@ module.exports = {
 	init,
 	emitMessage
 };
-

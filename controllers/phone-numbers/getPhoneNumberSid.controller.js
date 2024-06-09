@@ -24,4 +24,3 @@ const getPhoneNumberSid = async (req, res, next) => {
 };
 
 module.exports = getPhoneNumberSid;
-

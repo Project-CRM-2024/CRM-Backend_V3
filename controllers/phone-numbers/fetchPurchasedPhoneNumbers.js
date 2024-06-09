@@ -1,6 +1,6 @@
 'use strict';
 
-const { fetchPurchasedPhoneNumbersFunc } = require("../../services/purchase-phone-number.service");
+const { fetchPurchasedPhoneNumbersFunc } = require('../../services/purchase-phone-number.service');
 
 const fetchPurchasedPhoneNumbers = async (req, res, next) => {
 	const user = req.user;

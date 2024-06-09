@@ -37,4 +37,3 @@ const purchaseSelectedPhoneNumber = async (req, res, next) => {
 };
 
 module.exports = purchaseSelectedPhoneNumber;
-

@@ -22,4 +22,3 @@ const fetchUserDetails = async (req, res, next) => {
 module.exports = {
 	fetchUserDetails
 };
-

@@ -77,7 +77,7 @@ const deletePurchasedPhoneNumbersFromDbFunc = async (phoneNumber) => {
 	try {
 		return await PurchasePhoneNumbersModel.findOneAndDelete({ phoneNumber: phoneNumber })
 			.then(() => {
-				return "Delete success";
+				return 'Delete success';
 			})
 			.catch((error) => {
 				throw new Error(error);
@@ -94,4 +94,3 @@ module.exports = {
 	fetchDeletedPurchasedPhoneNumbersFunc,
 	deletePurchasedPhoneNumbersFromDbFunc
 };
-

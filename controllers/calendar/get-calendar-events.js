@@ -32,4 +32,3 @@ const getCalendarEvents = async (req, res, next) => {
 module.exports = {
 	getCalendarEvents
 };
-
