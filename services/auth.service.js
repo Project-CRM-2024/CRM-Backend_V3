@@ -24,15 +24,18 @@ const fetchUserDetailsFunc = async (userId) => {
 };
 
 const saveRefreshTokenFunc = async (userId, googleRefreshToken) => {
-	UserModel.updateMany({ _id: userId }, { $set: { googleRefreshToken: googleRefreshToken } }, { multi: true })
-	.exec()
-	.then(() => {
-		return "Refresh token updated successfully"
-	})
-	.catch((error) => {
-		throw new Error(error);
-	});
-}
+	UserModel.updateMany(
+		{ _id: userId },
+		{ $set: { googleRefreshToken: googleRefreshToken } },
+		{ multi: true }
+	)
+		.exec()
+		.then(() => {
+			return 'Refresh token updated successfully';
+		})
+		.catch((error) => {
+			throw new Error(error);
+		});
+};
 
 module.exports = { fetchUserDetailsFunc, saveRefreshTokenFunc };
-

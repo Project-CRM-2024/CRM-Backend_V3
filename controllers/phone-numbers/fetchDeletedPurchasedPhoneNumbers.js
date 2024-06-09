@@ -1,11 +1,12 @@
 'use strict';
 
-const { fetchDeletedPurchasedPhoneNumbersFunc } = require("../../services/purchase-phone-number.service");
+const {
+	fetchDeletedPurchasedPhoneNumbersFunc
+} = require('../../services/purchase-phone-number.service');
 
 const fetchDeletedPurchasedPhoneNumbers = async (req, res, next) => {
-    const user = req.user;
+	const user = req.user;
 	try {
-		
 		const deletedPurchasedPhoneNumberList = await fetchDeletedPurchasedPhoneNumbersFunc(user.id);
 		return res.status(200).send({
 			code: res.statusCode,

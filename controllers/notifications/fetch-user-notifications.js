@@ -22,4 +22,3 @@ const fetchUserNotification = async (req, res, next) => {
 module.exports = {
 	fetchUserNotification
 };
-

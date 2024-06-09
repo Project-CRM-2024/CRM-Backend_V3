@@ -8,7 +8,7 @@ const addNotificationFunc = async (user, content) => {
 			content
 		})
 			.then((response) => {
-                emitMessage(user)
+				emitMessage(user);
 				return response;
 			})
 			.catch((error) => {
@@ -23,7 +23,8 @@ const fetchUserNotificationFunc = async (user) => {
 	try {
 		return await NotificationModel.find({
 			user
-		}).sort({'createdAt': -1})
+		})
+			.sort({ createdAt: -1 })
 			.then((response) => {
 				return response;
 			})
@@ -36,4 +37,3 @@ const fetchUserNotificationFunc = async (user) => {
 };
 
 module.exports = { addNotificationFunc, fetchUserNotificationFunc };
-

@@ -4,7 +4,7 @@ const { getLocalNumbersFunc } = require('../../services/twilio.service');
 
 const getLocalNumbers = async (req, res, next) => {
 	try {
-		const {areaCode, state} = req.body;
+		const { areaCode, state } = req.body;
 		const availablePhoneNumberList = await getLocalNumbersFunc(state, areaCode);
 		//Retrieve local phone numbers
 		return res.status(200).send({
@@ -22,4 +22,3 @@ const getLocalNumbers = async (req, res, next) => {
 };
 
 module.exports = getLocalNumbers;
-
