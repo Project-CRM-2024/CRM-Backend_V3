@@ -9,6 +9,7 @@ const notificationRouter = require('./notifications-routes');
 const calendarRouter = require('./calendar.routes');
 const bookingRoutes = require('./booking.routes');
 const campaignRouter = require('./campaign.routes');
+const leadRouter = require('./lead.routes');
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router.use('/notifications', notificationRouter);
 router.use('/calendars', calendarRouter);
 router.use('/booking', bookingRoutes);
 router.use('/campaign', campaignRouter);
+router.use('/leads', leadRouter);
 
 router.get('/', indexController);
 
