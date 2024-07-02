@@ -2,10 +2,12 @@ const { Router } = require('express');
 const { createCampaign } = require('../controllers/campaign');
 const { fetchCampaignsByUser } = require('../controllers/campaign/fetch-campaigns-by-user');
 const authenticateJWT = require('../middlewares/auth/authenticate-jwt');
+const { triggerScheduler } = require('../controllers/campaign/send-sms');
 
 const campaignRouter = Router();
 
 campaignRouter.post('/create-campaign', authenticateJWT, createCampaign);
 campaignRouter.get('/fetch-campaigns-user', authenticateJWT, fetchCampaignsByUser);
+campaignRouter.post('/schedule', triggerScheduler);
 
 module.exports = campaignRouter;
