@@ -4,7 +4,7 @@ const { getCalendarEventsFunc } = require('../../services/google-api.service');
 
 const getCalendarEvents = async (req, res, next) => {
 	const user = req.user;
-	const {selectedDate} = req.body;
+	const { selectedDate } = req.body;
 	try {
 		const userResponse = await UserModel.findById(user.id);
 		if (userResponse.googleRefreshToken) {
@@ -32,4 +32,3 @@ const getCalendarEvents = async (req, res, next) => {
 module.exports = {
 	getCalendarEvents
 };
-

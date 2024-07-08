@@ -64,15 +64,16 @@ const purchasePhoneNumberFuncTwilio = async (phoneNumber) => {
 const sendSms = async (messagingServiceSid, to, body) => {
 	const client = require('twilio')(env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN);
 	client.messages
-	.create({
-	  body: body,
-	  messagingServiceSid: messagingServiceSid,
-	  to: to
-	})
-	.then(message => console.log(message.sid)).catch((error)=>{
-		console.log(error)
-	});
-}
+		.create({
+			body: body,
+			messagingServiceSid: messagingServiceSid,
+			to: to
+		})
+		.then((message) => console.log(message.sid))
+		.catch((error) => {
+			console.log(error);
+		});
+};
 
 module.exports = {
 	getLocalNumbersFunc,
@@ -81,4 +82,3 @@ module.exports = {
 	purchasePhoneNumberFuncTwilio,
 	sendSms
 };
-

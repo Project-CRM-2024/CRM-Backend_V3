@@ -38,8 +38,11 @@ const sendAccessRequest = async (req, res, next) => {
 				)
 					.then(async (response) => {
 						await userList.forEach(async (user) => {
-							await addNotificationFunc(user._id, `${currentUserDetails.firstName} ${currentUserDetails.lastName} requested my team access from you`);
-						})
+							await addNotificationFunc(
+								user._id,
+								`${currentUserDetails.firstName} ${currentUserDetails.lastName} requested my team access from you`
+							);
+						});
 						res.status(200).send(response);
 					})
 					.catch((error) => {
@@ -54,7 +57,7 @@ const sendAccessRequest = async (req, res, next) => {
 				user: userItem,
 				status: 'PENDING'
 			}));
-			console.log("refactorTeamObj", refactorTeamObj)
+			console.log('refactorTeamObj', refactorTeamObj);
 
 			await MyTeam.create({
 				user: user.id,
@@ -62,12 +65,15 @@ const sendAccessRequest = async (req, res, next) => {
 			})
 				.then(async (response) => {
 					await userList.forEach(async (user) => {
-						await addNotificationFunc(user._id, `${currentUserDetails.firstName} ${currentUserDetails.lastName} requested my team access from you`);
-					})
+						await addNotificationFunc(
+							user._id,
+							`${currentUserDetails.firstName} ${currentUserDetails.lastName} requested my team access from you`
+						);
+					});
 					res.status(200).send(response);
 				})
 				.catch((error) => {
-					console.error(error)
+					console.error(error);
 					res.status(400).send({ error: error.message });
 				});
 		}

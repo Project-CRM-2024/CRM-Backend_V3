@@ -26,4 +26,3 @@ const generateRefreshToken = async (req, res, next) => {
 module.exports = {
 	generateRefreshToken
 };
-

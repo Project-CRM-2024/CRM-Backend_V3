@@ -4,7 +4,7 @@ const { deleteCalendarEventFunc } = require('../../services/google-api.service')
 
 const deleteCalendarEvent = async (req, res, next) => {
 	const user = req.user;
-	const {eventId}  = req.params;
+	const { eventId } = req.params;
 	try {
 		const userResponse = await UserModel.findById(user.id);
 		if (userResponse.googleRefreshToken) {
@@ -30,4 +30,3 @@ const deleteCalendarEvent = async (req, res, next) => {
 module.exports = {
 	deleteCalendarEvent
 };
-

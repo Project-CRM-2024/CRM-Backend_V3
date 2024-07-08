@@ -9,7 +9,15 @@ const userSchema = new Schema(
 		profileImage: { type: String, required: false, default: null },
 		role: {
 			type: String,
-			enum: ['CRM_ADMIN', 'CRM_COMPANY_ADMIN', 'CRM_COMPANY_USER', 'CRM_COMPANY_SUPERVISOR', 'CRM_USER', 'CRM_SUPERVISOR', 'CRM_MANAGER'],
+			enum: [
+				'CRM_ADMIN',
+				'CRM_COMPANY_ADMIN',
+				'CRM_COMPANY_USER',
+				'CRM_COMPANY_SUPERVISOR',
+				'CRM_USER',
+				'CRM_SUPERVISOR',
+				'CRM_MANAGER'
+			],
 			default: 'CRM_USER'
 		},
 		timezone: { type: String, required: false },
@@ -26,7 +34,7 @@ const userSchema = new Schema(
 			type: {
 				type: String,
 				enum: ['DEFAULT_TIME', 'CUSTOM_TIME'],
-				required: false,
+				required: false
 			},
 			timeSlots: {
 				monday: { type: String, required: false },

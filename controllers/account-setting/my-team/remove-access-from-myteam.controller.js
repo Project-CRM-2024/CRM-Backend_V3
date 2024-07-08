@@ -1,7 +1,10 @@
 'use strict';
 const MyTeamModel = require('../../../models/my-team.model');
 const UserModel = require('../../../models/user.model');
-const { getSupervisorsListForMyTeam, getAgentsListForMyTeam } = require('../../../services/myteam.service');
+const {
+	getSupervisorsListForMyTeam,
+	getAgentsListForMyTeam
+} = require('../../../services/myteam.service');
 const { addNotificationFunc } = require('../../../services/notification.service');
 
 const removeAccessFromMyTeam = async (req, res, next) => {
@@ -9,7 +12,7 @@ const removeAccessFromMyTeam = async (req, res, next) => {
 		const user = req.user;
 		const { disconnectUserId } = req.body;
 		const currentUserDetails = await UserModel.findById(user.id);
-		
+
 		const myTeam = await MyTeamModel.findOne({ user: user.id }).populate({
 			path: 'team.user',
 			select: 'email'
@@ -21,8 +24,10 @@ const removeAccessFromMyTeam = async (req, res, next) => {
 			);
 			MyTeamModel.findOneAndUpdate({ user: user.id }, { team: filteredUserList }, { new: true })
 				.then(async (response) => {
-
-					await addNotificationFunc(disconnectUserId, `${currentUserDetails.firstName} ${currentUserDetails.lastName} removed my team access from you`);
+					await addNotificationFunc(
+						disconnectUserId,
+						`${currentUserDetails.firstName} ${currentUserDetails.lastName} removed my team access from you`
+					);
 
 					const supervisorList = await getSupervisorsListForMyTeam(user.id);
 					const agentList = await getAgentsListForMyTeam(user.id);
@@ -57,4 +62,3 @@ const removeAccessFromMyTeam = async (req, res, next) => {
 };
 
 module.exports = removeAccessFromMyTeam;
-

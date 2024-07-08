@@ -22,4 +22,3 @@ const fetchCampaignsByUser = async (req, res, next) => {
 module.exports = {
 	fetchCampaignsByUser
 };
-

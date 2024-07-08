@@ -21,4 +21,3 @@ const fetchAccessRequests = async (req, res, next) => {
 };
 
 module.exports = fetchAccessRequests;
-

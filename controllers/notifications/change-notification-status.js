@@ -3,7 +3,7 @@ const NotificationModel = require('../../models/notifications.model');
 const { fetchUserNotificationFunc } = require('../../services/notification.service');
 
 const changeNotificationStatus = async (req, res, next) => {
-	const user = req.user
+	const user = req.user;
 	try {
 		NotificationModel.updateMany({ user: user.id }, { $set: { read: true } }, { multi: true })
 			.exec()
@@ -29,4 +29,3 @@ const changeNotificationStatus = async (req, res, next) => {
 module.exports = {
 	changeNotificationStatus
 };
-

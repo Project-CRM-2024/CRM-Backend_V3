@@ -4,7 +4,7 @@ const { createCalendarEventsFunc } = require('../../services/google-api.service'
 
 const createCalendarEvent = async (req, res, next) => {
 	const user = req.user;
-	const eventDetails  = req.body;
+	const eventDetails = req.body;
 	try {
 		const userResponse = await UserModel.findById(user.id);
 		if (userResponse.googleRefreshToken) {
@@ -30,4 +30,3 @@ const createCalendarEvent = async (req, res, next) => {
 module.exports = {
 	createCalendarEvent
 };
-

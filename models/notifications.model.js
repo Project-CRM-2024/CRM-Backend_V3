@@ -11,7 +11,7 @@ const NotificationsSchema = new Schema(
 			type: Boolean,
 			default: false
 		},
-		deletedAt: { type: Date, required: false, default: null },
+		deletedAt: { type: Date, required: false, default: null }
 	},
 	{ timestamps: true }
 );
@@ -19,4 +19,3 @@ const NotificationsSchema = new Schema(
 const NotificationModel = model('Notification', NotificationsSchema);
 
 module.exports = NotificationModel;
-

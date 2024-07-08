@@ -15,8 +15,11 @@ const removeMyTeamAccessRequestByAgentOrSupervisor = async (req, res, next) => {
 			{ new: true }
 		)
 			.then(async (response) => {
-				console.log(response)
-				await addNotificationFunc(response.user._id, `${user.username}  removed access from your my team`)
+				console.log(response);
+				await addNotificationFunc(
+					response.user._id,
+					`${user.username}  removed access from your my team`
+				);
 				const data = await getAccessRequests(user.id);
 				return res.status(200).send({
 					code: res.statusCode,
@@ -38,4 +41,3 @@ const removeMyTeamAccessRequestByAgentOrSupervisor = async (req, res, next) => {
 };
 
 module.exports = removeMyTeamAccessRequestByAgentOrSupervisor;
-

@@ -18,6 +18,11 @@ authRouter.get('/user', authenticateJWT, fetchUserDetails);
 authRouter.post('/login', validateSchema({ body: AuthValidation.loginSchema }), loginController);
 authRouter.post('/register', registerController);
 authRouter.put('/update', authenticateJWT, updateController);
-authRouter.put('/change-password', authenticateJWT, authorizeRole(['CRM_USER']), changePasswordController);
+authRouter.put(
+	'/change-password',
+	authenticateJWT,
+	authorizeRole(['CRM_USER']),
+	changePasswordController
+);
 
 module.exports = authRouter;

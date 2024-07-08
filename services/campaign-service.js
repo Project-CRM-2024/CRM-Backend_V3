@@ -39,17 +39,22 @@ const fetchCampaignsByUserFunc = async (user) => {
 	try {
 		const campaigns = await CampaignModel.find({ user });
 
-		if(campaigns.length){
+		if (campaigns.length) {
 			return campaigns.map((campaign) => {
 				const campaignDate = new Date(campaign.date);
 				const sendDate = `${campaignDate.getFullYear()}/${campaignDate.getMonth()}/${campaignDate.getDate()}`;
 
 				const campaignTime = new Date(campaign.time);
-				const sendTime = `${campaignTime.getHours()}:${campaignTime.getMinutes()}:${campaignTime.getSeconds()}`
+				const sendTime = `${campaignTime.getHours()}:${campaignTime.getMinutes()}:${campaignTime.getSeconds()}`;
 				return {
 					campaignName: campaign.campaignName,
-					type: campaign.isSendEmail &&  campaign.isSendText ? 'SMS & Email Campaign' : campaign.isSendEmail ?  'Email Campaign' :  'SMS Campaign',
-					sentAt: sendDate + " " + sendTime,
+					type:
+						campaign.isSendEmail && campaign.isSendText
+							? 'SMS & Email Campaign'
+							: campaign.isSendEmail
+								? 'Email Campaign'
+								: 'SMS Campaign',
+					sentAt: sendDate + ' ' + sendTime,
 					createdAt: campaign.createdAt,
 					estimatedCost: campaign.estimatedCost,
 					email: {
@@ -63,14 +68,12 @@ const fetchCampaignsByUserFunc = async (user) => {
 					totalCarrierViolations: campaign.totalCarrierViolations
 				};
 			});
-		}else{
-			return []
+		} else {
+			return [];
 		}
-	
 	} catch (error) {
 		throw new Error(error);
 	}
 };
 
 module.exports = { createCampaignFunc, fetchCampaignsByUserFunc };
-

@@ -37,4 +37,3 @@ const createCampaign = async (req, res, next) => {
 module.exports = {
 	createCampaign
 };
-

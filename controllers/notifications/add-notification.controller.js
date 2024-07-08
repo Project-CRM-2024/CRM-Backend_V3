@@ -22,4 +22,3 @@ const addNotification = async (req, res, next) => {
 module.exports = {
 	addNotification
 };
-

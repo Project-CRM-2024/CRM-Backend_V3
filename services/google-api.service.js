@@ -46,10 +46,9 @@ const getCalendarEventsFunc = async (refresh_token, selectedDate) => {
 		singleEvents: true,
 		orderBy: 'startTime'
 	});
-	await google.calendar({ version: 'v3', auth: oauth2Client }).calendarList.list(
-        {},
-        (err, result) => console.log("Output: " + result)
-    );;
+	await google
+		.calendar({ version: 'v3', auth: oauth2Client })
+		.calendarList.list({}, (err, result) => console.log('Output: ' + result));
 	return calendarEvents.data.items;
 };
 
@@ -123,4 +122,3 @@ module.exports = {
 	createCalendarEventsFunc,
 	deleteCalendarEventFunc
 };
-
