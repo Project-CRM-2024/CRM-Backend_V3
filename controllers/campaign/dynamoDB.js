@@ -33,7 +33,8 @@ const addCampaign = async (schedule) => {
 			sms: schedule?.isSendText,
 			message: schedule?.message,
 			emailBody: schedule?.email?.body,
-			emailTitle: schedule?.email?.title
+			emailTitle: schedule?.email?.title,
+			fileName: schedule?.fileName
 		}
 	};
 
