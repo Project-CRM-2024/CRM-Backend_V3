@@ -5,6 +5,7 @@ const {
 	GetCommand,
 	ScanCommand
 } = require('@aws-sdk/lib-dynamodb');
+const { randomUUID } = require('crypto');
 require('dotenv').config();
 
 const client = new DynamoDBClient({
@@ -20,13 +21,14 @@ const dynamoClient = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = 'crm-campaign';
 
 const addCampaign = async (schedule) => {
+	
 	const params = {
 		TableName: TABLE_NAME,
 		Item: {
-			id: new Date().toString(),
-			user: schedule?.user.toString(),
-			date: schedule?.date.toString(),
-			time: schedule?.time.toString(),
+			id: randomUUID(),
+			user: schedule?.id.toString(),
+			date: schedule?.date,
+			time: schedule?.time,
 			email: schedule?.isSendEmail,
 			sms: schedule?.isSendText,
 			message: schedule?.message,

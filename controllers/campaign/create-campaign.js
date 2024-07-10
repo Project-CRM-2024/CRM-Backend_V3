@@ -1,4 +1,5 @@
 'use strict';
+const dayjs = require('dayjs');
 const { createCampaignFunc } = require('../../services/campaign-service');
 const { addCampaign } = require('./dynamoDB');
 
@@ -6,12 +7,16 @@ const createCampaign = async (req, res, next) => {
 	const { campaignName, date, time, isScheduled, isSendText, isSendEmail, message, email } =
 		req.body;
 	const user = req.user;
+
 	try {
+		const dateTimeString = `${date} ${time}`;
+		const format = 'MM/DD/YYYY HH:mm:ss';
+		const formattedDate = dayjs(dateTimeString, format, true).toDate();
 		const data = await createCampaignFunc(
 			user.id,
 			campaignName,
-			date,
-			time,
+			formattedDate,
+			formattedDate, // Date time has merged
 			isScheduled,
 			isSendText,
 			isSendEmail,
@@ -20,7 +25,18 @@ const createCampaign = async (req, res, next) => {
 		);
 
 		//Need to implement cron job for send emails or sms for a specific time
-		addCampaign(data);
+		const formattedCampaignData = {
+			id: user.id,
+			campaignName,
+			date,
+			time,
+			isScheduled,
+			isSendText,
+			isSendEmail,
+			message,
+			email
+		};
+		addCampaign(formattedCampaignData);
 
 		return res.status(200).send({
 			code: res.statusCode,
@@ -28,6 +44,7 @@ const createCampaign = async (req, res, next) => {
 			campaign: data
 		});
 	} catch (error) {
+		console.log(error);
 		res
 			.status(500)
 			.send({ code: 500, message: 'Something went wrong', error: { message: error.message } });
